@@ -10,13 +10,20 @@ const Photo = require('./models/Photo.js');
 const PhotoController = require('./controllers/photoControllers');
 const PageController = require('./controllers/pageController');
 //mongodb://localhost/pcat-test-db
-mongoose.connect(
-  'mongodb+srv://yusuf:allah1@etsyfetch.vaunvnx.mongodb.net/pcat-Test-db-gcloud?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose
+  .connect(
+    'mongodb+srv://yusuf:allah1@etsyfetch.vaunvnx.mongodb.net/pcat-Test-db-gcloud?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => {
+    console.log('Connected To Database');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
@@ -35,7 +42,7 @@ app.get('/about', PageController.getAboutPage);
 app.get('/add', PageController.getAddPage);
 app.get('/photos/edit/:id2', PageController.getEditPage);
 
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`http://localhost:${port} adresinde başlatıldı`);
 });
