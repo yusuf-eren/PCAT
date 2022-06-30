@@ -9,11 +9,14 @@ const methodOverride = require('method-override');
 const Photo = require('./models/Photo.js');
 const PhotoController = require('./controllers/photoControllers');
 const PageController = require('./controllers/pageController');
-
-mongoose.connect('mongodb://localhost/pcat-test-db', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+//mongodb://localhost/pcat-test-db
+mongoose.connect(
+  'mongodb+srv://yusuf:allah1@etsyfetch.vaunvnx.mongodb.net/pcat-Test-db-gcloud?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
